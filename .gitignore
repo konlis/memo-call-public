@@ -1,0 +1,117 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+# nested workspaces (packages/*/node_modules) — the anchored rule above misses them
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# database
+# Any local SQLite file — including the -wal/-shm/-journal side files, which
+# hold recently written pages (i.e. transcripts) even after the main file is
+# deleted. Migrations are .sql, so nothing legitimate matches these.
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
+.DS_Store
+dependency-graph.svg
+
+# key material — never versioned, whatever it is named
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+id_ed25519*
+credentials.json
+service-account*.json
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+# do not commit any .env files to git, except for the .env.example file. https://create.t3.gg/en/usage/env-variables#using-environment-variables
+# Deny-by-default + jawny wyjatek na wzorce. Poprzednia wersja wymieniala `.env`
+# i `.env*.local`, wiec plik nazwany o jeden czlon inaczej — realnie `.env.spike`,
+# 2026-09-04 — byl commitowalny. Nazwa pliku z sekretami nie moze byc miejscem,
+# w ktorym literowka decyduje o wyciekU.
+.env*
+!.env*.example
+
+# Audio ze spike'ow telefonii: nagrania PRAWDZIWYCH rozmow, sciagane przez
+# `zadarma-stereo.mjs --fetch` i rozbijane na kanaly przy tescie T3.
+# Postura transit-only z CLAUDE.md dotyczy takze katalogu roboczego --
+# nagranie ma zyc tyle, ile trwa analiza, i nie ma prawa trafic do historii gita.
+zadarma-rec.*
+/*.mp3
+/*.wav
+/*.ogg
+# (historycznie wymieniane osobno; teraz pokryte przez `.env*` powyzej)
+# .env  .env*.local  .env.onboard.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# Code-reviewer run transcripts (packages/code-reviewer/.runs/). Each file holds
+# the reviewed diff verbatim — i.e. proprietary source — plus the model's
+# reading of it. Unanchored so it also covers any future package that keeps one.
+# No trailing slash on purpose: a directory-only pattern matches only once the
+# directory EXISTS, so `git check-ignore packages/code-reviewer/.runs` would
+# report the path as tracked on a fresh checkout — right up until the first run
+# created it.
+.runs
+
+# idea files
+.idea
+
+# Playwright MCP runtime artifacts (console logs + page snapshots from agent browser sessions)
+.playwright-mcp/
+# Playwright E2E (tests/e2e/*) — runner artifacts + hermetic test DB
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/e2e-test.db
+/e2e-test.db-*
+# Playwright CLI session artifacts (console logs, page snapshots, saved auth state)
+/.playwright-cli/
+/auth.json
+
+# Agent toolkit fetched from outside this repo — NOT our content, NOT versioned here.
+# Treat it like node_modules: present in the working tree, absent from history.
+#   - .claude/skills, prompts, config-templates + the manifest come from the paid
+#     10xDevs course via `npx @przeprogramowani/10x-cli get`; re-fetch to restore.
+#   - .agents/skills are third-party vendor docs (Vercel, zod, drizzle, Next).
+# Removed from the whole history on 2026-08-05 before the repo went public.
+# Do NOT un-ignore these: the next `10x-cli get` would silently re-publish them.
+/.claude/skills/
+/.claude/prompts/
+/.claude/config-templates/
+/.claude/.10x-cli-manifest.json
+# Per-machine agent settings (permission allowlists, local paths).
+/.claude/settings.local.json
+CLAUDE.local.md
+/.agents/
+.export-denylist

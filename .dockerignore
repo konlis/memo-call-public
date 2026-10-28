@@ -1,0 +1,22 @@
+/.git
+/node_modules
+.dockerignore
+# Same deny-by-default as .gitignore: `COPY . .` in the build stage would
+# otherwise pull a local .env.local into the image, and Next's standalone
+# output carries .env* files through to the runtime layer.
+.env*
+!.env*.example
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+zadarma-rec.*
+*.mp3
+*.wav
+*.ogg
+Dockerfile
+fly.toml
+# Standalone dev tooling, not part of the MemoCall app. Has its own
+# package.json / package-lock.json and is installed separately — the app image
+# must never see it. See packages/code-reviewer/README.md.
+/packages
