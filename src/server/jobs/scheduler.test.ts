@@ -344,7 +344,7 @@ describe("runDeleteSweep", () => {
 /**
  * Capture reconciliation (`telephony-capture-reconciliation` phase 2).
  *
- * Real libsql throughout, per `lessons.md`: the whole point of the sweep is a
+ * Real libsql throughout, per CLAUDE.md "Lessons": the whole point of the sweep is a
  * pair of INSERTs guarded by a partial-unique index, and a stub-db test
  * structurally cannot tell you whether that SQL is valid.
  */
@@ -627,22 +627,19 @@ describe("runReconcileSweep", () => {
 			await runReconcileSweep(deps);
 
 			const res = await handleRecordingStatus(
-				new Request(
-					"https://your-app.fly.dev/api/telephony/recording-status",
-					{
-						method: "POST",
-						headers: {
-							"content-type": "application/x-www-form-urlencoded",
-							"x-twilio-signature": "mock-valid",
-						},
-						body: new URLSearchParams({
-							CallSid: callSid,
-							RecordingSid: `${callSid}.rec`,
-							RecordingStatus: "completed",
-							RecordingDuration: "7",
-						}).toString(),
+				new Request("https://your-app.fly.dev/api/telephony/recording-status", {
+					method: "POST",
+					headers: {
+						"content-type": "application/x-www-form-urlencoded",
+						"x-twilio-signature": "mock-valid",
 					},
-				),
+					body: new URLSearchParams({
+						CallSid: callSid,
+						RecordingSid: `${callSid}.rec`,
+						RecordingStatus: "completed",
+						RecordingDuration: "7",
+					}).toString(),
+				}),
 				{
 					telephony: new MockTelephonyProvider(),
 					db,

@@ -14,7 +14,7 @@ const DEFAULT_MODEL = "nova-3";
  * Minimal view of the Deepgram pre-recorded response — only the fields we map.
  * `multichannel=true` returns one `channels[]` entry per audio channel, each with
  * its own `alternatives[0].transcript` + word timings. Validated in the Phase 1
- * spike (`scripts/spike/stt-bakeoff.mjs` + `spike.md`).
+ * spike (an STT bake-off on real Polish calls).
  */
 type DeepgramWord = { start?: number; end?: number };
 type DeepgramAlternative = { transcript?: string; words?: DeepgramWord[] };

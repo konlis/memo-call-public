@@ -13,7 +13,7 @@ const MAX_TOKENS = 4096;
 // One generic system prompt for every schema (the provider is schema-agnostic; the
 // business prompt arrives as the user message from analyze.ts / classify.ts). The
 // array-format clause is load-bearing: the Phase 1 spike caught Haiku serializing
-// an array field as `<item>…</item>` pseudo-XML instead of a JSON array (spike.md),
+// an array field as `<item>…</item>` pseudo-XML instead of a JSON array,
 // which `safeParse` then rejected. Spelling out "arrays as JSON arrays" + the
 // bounded retry below is the agreed fix.
 const SYSTEM_PROMPT = [

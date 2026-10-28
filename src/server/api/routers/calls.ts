@@ -93,7 +93,7 @@ export const callsRouter = createTRPCRouter({
 			// row per number — re-dialing bumps recency instead of appending, so the
 			// table stays a number set rather than a call log. Target is the FULL
 			// unique index `dialed_user_e164_uq`, so the partial-index
-			// `onConflictDoNothing({ target, where })` emission bug in lessons.md
+			// `onConflictDoNothing({ target, where })` emission bug in CLAUDE.md "Lessons"
 			// does not apply here.
 			try {
 				await ctx.db

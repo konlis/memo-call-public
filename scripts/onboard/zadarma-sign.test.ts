@@ -6,7 +6,7 @@
 // Zadarma recipes fail as a clean 401, so a probe signing slightly differently
 // reports "wrong key / not an EU project" about credentials that are perfectly
 // fine — the operator then rotates a good key, twice, before suspecting the
-// tool. The same trap the repo already hit with Deepgram (see lessons.md,
+// tool. The same trap the repo already hit with Deepgram (see CLAUDE.md "Lessons",
 // "Cloud-vendor secret traps") and with the Deepgram management-endpoint probe.
 //
 // Asserting on FIXED VECTORS would not be enough: fixed vectors pin the port,

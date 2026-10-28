@@ -16,7 +16,7 @@ import { describe, expect, test, vi } from "vitest";
  * are pinned as such below. It does NOT prove Next.js
  * compiles the pattern identically — Next runs it through path-to-regexp, this
  * runs it as a bare RegExp — and a matcher can also fail by not being loaded at
- * all (the repo-root-`proxy.ts` trap in lessons.md, which only a build's route
+ * all (the repo-root-`proxy.ts` trap in CLAUDE.md "Lessons", which only a build's route
  * table shows). Those two remain manual checks; this covers the third failure
  * mode, which is the one that changes with every new route: a token that is
  * missing, misspelled, or silently swallowing its neighbours.

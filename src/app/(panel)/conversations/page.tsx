@@ -10,7 +10,7 @@ import { PAGE_SIZE } from "./_lib/list-config";
 // (`{ limit: PAGE_SIZE }`) for the hydrated page to land — see conversations-view.
 // The prefetch runs the server caller → a DB read. Without this, Next.js tries
 // to STATICALLY prerender `/conversations` at build time, where it hits the empty
-// placeholder DB ("no such table") and fails the build (lessons.md: "a green
+// placeholder DB ("no such table") and fails the build (CLAUDE.md "Lessons": "a green
 // build ≠ deploy" — DB-querying RSCs must opt out of static prerender).
 export const dynamic = "force-dynamic";
 

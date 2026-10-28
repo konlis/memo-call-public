@@ -131,7 +131,7 @@ export const conversations = createTable(
 		// plus an explicit state. THIS is the one table that holds a number the
 		// user did not type, and the one row shape that links a recording to its
 		// other party — the thing every comment below used to say must never
-		// exist. It exists now by product decision (variant C, `prd.md` FR-025),
+		// exist. It exists now by product decision (variant C, FR-025),
 		// and it exists NARROWLY:
 		//
 		//  - ONE write path. Only `jobs/counterparty.ts` (`runCounterpartySweep`)
@@ -350,7 +350,7 @@ export const dialedNumbers = createTable(
 		index("dialed_user_lastused_idx").on(t.userId, t.lastUsedAt),
 		// One row per number — `calls.placeOutbound` upserts on this exact target.
 		// A FULL (non-partial) unique index on purpose: the partial-index
-		// `onConflictDoNothing({ target, where })` emission bug in lessons.md does
+		// `onConflictDoNothing({ target, where })` emission bug in CLAUDE.md "Lessons" does
 		// not apply, so a plain `onConflictDoUpdate({ target })` is safe here.
 		uniqueIndex("dialed_user_e164_uq").on(t.userId, t.e164),
 	],
@@ -375,14 +375,12 @@ export const dialedNumbers = createTable(
  *    it lives on `conversations` (`counterparty_e164`, matched to `e164` here BY
  *    VALUE), not here: this table still cannot, on its own, say who any
  *    recording was with. Until FR-025 the accounting read "`conversations`
- *    gains no column"; that sentence is history now and is kept only in
- *    `context/changes/caller-identity-in-archive/change.md`.
+ *    gains no column"; that sentence is history now.
  *  - The pair (`dialed_numbers`, `contacts`) turns *a set of numbers that
  *    were dialled* into *a named address book*. The `last_used_at` ↔
  *    `conversations.createdAt` time correlation (NOT `started_at`, which is
  *    always NULL under Zadarma) yields a NAME rather than a number. That is a
  *    real cost, accepted with the 2026-09-15 decision (see
- *    `context/foundation/roadmap-post-mvp.md` S-06 and
  *    `context/domain/04-privacy-and-anonymity.md` §A-1).
  *  - There is deliberately NO foreign key between `contacts` and
  *    `dialed_numbers`, and NONE between `contacts` and `conversations`. All
@@ -399,7 +397,7 @@ export const dialedNumbers = createTable(
  * contact, and the predicate states the intent where the next reader will look.
  * ⚠️ Because it is partial, the write path must NOT use
  * `onConflictDoNothing({ target, where })` — drizzle mis-positions the predicate
- * (lessons.md; it is the exact reason `dialed_user_e164_uq` above is full).
+ * (CLAUDE.md "Lessons"; it is the exact reason `dialed_user_e164_uq` above is full).
  * `contacts.create` does an explicit SELECT then INSERT, and maps a genuine
  * constraint violation via `isUniqueViolation`.
  */

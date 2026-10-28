@@ -42,7 +42,7 @@ import type {
 	TranscriptSegment,
 } from "~/server/stt/types";
 
-// Real-libsql integration test (per lessons.md): the atomic claim
+// Real-libsql integration test (per CLAUDE.md "Lessons"): the atomic claim
 // (`UPDATE … WHERE status='pending' RETURNING`) and the persist-and-done
 // transaction are exactly the SQL a stub db can't exercise. We apply the real
 // migrations to a throwaway DB and drive `processJob` end-to-end.
@@ -707,7 +707,7 @@ describe("processJob — persist atomicity (Phase 2)", () => {
 	// — `tx.update(processingJobs)`, which is UNCONDITIONAL (it fires regardless of
 	// candidateTags count, unlike an insert-trap that the empty-tag loop would skip)
 	// — and assert real libsql ROLLBACKs every prior write. Real libsql is mandatory:
-	// a stub db cannot model BEGIN…ROLLBACK (lessons.md "a stub db lies about SQL").
+	// a stub db cannot model BEGIN…ROLLBACK (CLAUDE.md "Lessons" "a stub db lies about SQL").
 
 	test("a forced throw on the done-flip rolls back the whole persist tx (re-runnable job, zero partial writes)", async () => {
 		const { conversationId, jobId } = await seedJob({});

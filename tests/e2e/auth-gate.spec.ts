@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-// Risk: context/foundation/test-plan.md #7 (abuse) — "an anonymous request reads
-//       conversation data". Cheapest layer per §2: "integration + ONE e2e
+// Risk: abuse — "an anonymous request reads conversation data".
+//       Cheapest layer: "integration + ONE e2e
 //       anon-redirect". The integration/unit halves are already covered
 //       (webhooks.test.ts 403-on-signature-mismatch; conversations.test.ts
 //       UNAUTHORIZED). THIS spec covers the residual no unit test reaches: the

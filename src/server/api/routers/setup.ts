@@ -17,8 +17,8 @@ export const setupRouter = createTRPCRouter({
 	setInitialPassword: publicProcedure
 		.input(z.object({ password: PASSWORD_VALIDATION_SCHEMA }))
 		.mutation(async ({ ctx, input }) => {
-			// Refuse to overwrite an existing password — in-app rotation is a PRD
-			// Non-Goal (rotation = SSH admin reset). The proxy's /setup 404 is the
+			// Refuse to overwrite an existing password — in-app rotation is a product
+			// non-goal (rotation = SSH admin reset). The proxy's /setup 404 is the
 			// UX-side belt; this is the server-side braces.
 			const existing = await ctx.db.query.authConfig.findFirst({
 				where: eq(authConfig.userId, ctx.userId),

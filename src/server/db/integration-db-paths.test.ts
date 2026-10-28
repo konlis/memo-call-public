@@ -14,8 +14,7 @@
  * dropped suffix would restore the race silently and nothing would fail until
  * somebody happens to run two suites at once.
  *
- * Same technique as `workflow-safety.test.ts` in `packages/code-reviewer`:
- * when a rule cannot be expressed in the type system and its violation is
+ * The technique: when a rule cannot be expressed in the type system and its violation is
  * invisible at runtime, assert it over the source text.
  */
 

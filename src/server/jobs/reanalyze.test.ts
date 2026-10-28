@@ -34,7 +34,7 @@ import type { Analysis } from "~/server/llm/schemas";
 import type { LlmProvider } from "~/server/llm/types";
 import type { TranscriptResult, TranscriptSegment } from "~/server/stt/types";
 
-// Real-libsql integration test (per lessons.md): the kind-scoped atomic claim, the
+// Real-libsql integration test (per CLAUDE.md "Lessons"): the kind-scoped atomic claim, the
 // success-only persist transaction, and the per-tag merge are exactly the SQL a stub
 // db can't exercise. We apply the real migrations to a throwaway DB and drive
 // `reanalyzeJob` / `pollOnce` end-to-end.

@@ -72,7 +72,7 @@ const transcriptSegmentSchema = z.object({
  * only the 1:1 `projects` label). Query 2 is a bounded `inArray(conversationId,
  * pageIds)` status lookup, reduced to the latest job per conversation in plain TS.
  * This keeps the whole thing pure Drizzle-builder (correctly quotes the
- * `memo-call_` prefix + the mixed camelCase/snake_case columns — see lessons.md)
+ * `memo-call_` prefix + the mixed camelCase/snake_case columns — see CLAUDE.md "Lessons")
  * and makes the "one row per conversation" invariant a testable JS reduction
  * rather than a fight with SQL fan-out semantics.
  */
@@ -266,7 +266,7 @@ export function createConversationsRouter(
 				// Empty/absent tags ⇒ no predicate (`undefined`), so the default query key
 				// is byte-identical to the pre-S-05 shape. `.having()` + subquery-in-
 				// `inArray()` were unproven in this repo; both render + run correctly
-				// (prototyped against a throwaway libsql DB per lessons.md before landing).
+				// (prototyped against a throwaway libsql DB per CLAUDE.md "Lessons" before landing).
 				const normalizedTags = filter?.tags ? normalizeTags(filter.tags) : [];
 				const tagPredicate =
 					normalizedTags.length > 0
@@ -637,7 +637,7 @@ export function createConversationsRouter(
 		// screen, never the log).
 		//
 		// ⚠️ NO `onConflict*`: `contact_user_e164_uq` is PARTIAL and drizzle
-		// mis-positions the predicate (lessons.md). The SELECT is the courtesy;
+		// mis-positions the predicate (CLAUDE.md "Lessons"). The SELECT is the courtesy;
 		// `isUniqueViolation` on the write is the guarantee when the SELECT loses
 		// a race. The `existing` UPDATE additionally carries `e164 IS NULL` in
 		// its WHERE, so a contact that gained a number between the check and the

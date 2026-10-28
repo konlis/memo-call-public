@@ -339,8 +339,7 @@ describe("TwilioTelephonyProvider — streamRecording / deleteRecording (stubbed
 
 describe("TwilioTelephonyProvider — placeCall (outbound click-to-call, stubbed fetch)", () => {
 	const tel = new TwilioTelephonyProvider(outboundConfig);
-	const callbackUrl =
-		"https://your-app.fly.dev/api/telephony/recording-status";
+	const callbackUrl = "https://your-app.fly.dev/api/telephony/recording-status";
 	const recipient = "+48600100200";
 
 	afterEach(() => {

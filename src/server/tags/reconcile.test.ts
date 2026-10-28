@@ -17,7 +17,7 @@ import * as schema from "~/server/db/schema";
 import { conversations, tags, users } from "~/server/db/schema";
 import { reconcileTags, type TagPolicy } from "~/server/tags/reconcile";
 
-// Real-libsql integration test (per lessons.md): the reconciler IS SQL — a delete
+// Real-libsql integration test (per CLAUDE.md "Lessons"): the reconciler IS SQL — a delete
 // whose predicate list changes by policy, plus an insert loop inside a transaction.
 // A stub db would assert nothing about the thing that can actually break. Until now
 // both policies were only reachable through a whole job worker; this suite drives

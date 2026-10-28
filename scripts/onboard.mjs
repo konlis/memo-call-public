@@ -219,7 +219,7 @@ async function main() {
 	// above, so `buildSecretCommands` structurally cannot express it — it is
 	// printed as prose instead. Setting TELEPHONY_PROVIDER on an image whose
 	// `src/env.js` enum predates the value crash-loops the Machine on env
-	// validation (the Deepgram cutover hit exactly this; see lessons.md).
+	// validation (the Deepgram cutover hit exactly this; see CLAUDE.md "Lessons").
 	console.log(
 		"\n[onboard] ⚠ ZANIM wkleisz blok: upewnij się, że wdrożony obraz zna wartość " +
 			`TELEPHONY_PROVIDER="${cfg.TELEPHONY_PROVIDER}" (enum w src/env.js). ` +

@@ -12,7 +12,7 @@ export default defineConfig({
 		// runtime — `npm run test` is Vitest, `npx playwright test` is E2E.
 		//
 		// packages/** are standalone tools with their OWN package.json, lockfile and
-		// dependency graph (see packages/code-reviewer/README.md) — NOT workspaces of
+		// dependency graph (none ship in this repository) — NOT workspaces of
 		// this app. The default include glob `**/*.test.ts` would otherwise collect
 		// them and run them against the app's graph (root zod 3 alongside the
 		// package's zod 4), silently undoing that isolation and making a package

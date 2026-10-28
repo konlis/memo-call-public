@@ -11,7 +11,7 @@ import { ConversationDetail } from "./_components/conversation-detail";
 // renders an in-panel "not found" (keeps the panel chrome; no data leak).
 // `force-dynamic`: both prefetches are DB reads, so this RSC must opt out of
 // static prerender or the build hits the empty placeholder DB ("no such table";
-// lessons.md "a green build ≠ deploy").
+// CLAUDE.md "Lessons" "a green build ≠ deploy").
 export const dynamic = "force-dynamic";
 
 export default async function ConversationDetailPage({

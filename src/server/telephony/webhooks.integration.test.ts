@@ -28,7 +28,7 @@ import { ZadarmaTelephonyProvider } from "~/server/telephony/zadarma";
 // SQL — which is exactly where the partial-index idempotency bug hid (drizzle
 // emitted `do nothing where …`, rejected by SQLite). This test applies the real
 // migrations to a throwaway DB and drives the handler end-to-end so that class of
-// failure surfaces in CI, per lessons.md ("a green unit test ≠ real SQL").
+// failure surfaces in CI, per CLAUDE.md "Lessons" ("a green unit test ≠ real SQL").
 const DB_PATH = makeIntegrationDbPath("webhooks");
 const DB_URL = `file:${DB_PATH}`;
 

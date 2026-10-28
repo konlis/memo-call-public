@@ -8,10 +8,9 @@ import { mapZadarmaCounterparties } from "~/server/telephony/zadarma-counterpart
  * Unit tests for the one module allowed to read `clid` / `destination` out of
  * `/v1/statistics/pbx/?version=2` (FR-025).
  *
- * PROVENANCE OF THE FIXTURES (`lessons.md` requires it of any frozen literal).
- * The SHAPES are live — measured on 2026-10-19 and recorded, with placeholders
- * in place of every number, in `context/changes/caller-identity-in-archive/
- * spike.md`: an inbound call spans a trunk leg (`sip: "0"`) and an extension
+ * PROVENANCE OF THE FIXTURES (CLAUDE.md "Lessons" requires it of any frozen literal).
+ * The SHAPES are live — measured on two live calls on 2026-10-19 and recorded
+ * with placeholders in place of every number: an inbound call spans a trunk leg (`sip: "0"`) and an extension
  * leg (`sip: "100"`) with an IDENTICAL `clid` of the form `"Name" <+48…>` and
  * `destination` = the user's own DID as a JSON NUMBER; an outbound call has ONE
  * leg whose `clid` is the user's own GSM (`"" <+…>`) and whose `destination`
@@ -25,7 +24,7 @@ const INBOUND_ID = "in_3e5854dd574d2fa0cc66bff5360d64a88bc5b465";
 const VOICEMAIL_ID = "in_9d66fd4f0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e";
 const OUTBOUND_ID = "out_4694c79062ff9e0cac2bd7783749f5ef1b500190";
 
-/** Placeholders, in the roles `spike.md` names. */
+/** Placeholders, in the roles the spike recorded. */
 const COUNTERPARTY = "500100200"; // the other party (Polish mobile shape)
 const OWN_DID = 48172000000; // the user's DID, as the vendor renders it: a number
 const OWN_GSM = "500100300"; // USER_FORWARD_NUMBER
@@ -391,7 +390,7 @@ describe("mapZadarmaCounterparties — the presentation name", () => {
 
 describe("mapZadarmaCounterparties — outbound: destination of the longest leg", () => {
 	/**
-	 * The load-bearing outbound test. MEASURED (`spike.md`): on an `out_` leg
+	 * The load-bearing outbound test. MEASURED (live spike): on an `out_` leg
 	 * `clid` is the USER'S OWN GSM — the callback rings it first — and the
 	 * dialled party is `destination`, a JSON number. The "clid in both
 	 * directions" rule that this test refutes would have stored the owner's

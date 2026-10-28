@@ -31,7 +31,7 @@ import { telephony } from "~/server/telephony";
 
 // Real-libsql integration harness (mirrors projects.test.ts / jobs.test.ts).
 // `placeOutbound` now upserts into `dialed_numbers` through a real ON CONFLICT
-// clause, and lessons.md is explicit that a stub db cannot prove that SQL: the
+// clause, and CLAUDE.md "Lessons" is explicit that a stub db cannot prove that SQL: the
 // partial-index `onConflictDoNothing({ target, where })` bug shipped a 500 to
 // production with every stub test green. So this file runs the real migrations.
 const DB_PATH = makeIntegrationDbPath("calls-router");

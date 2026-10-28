@@ -39,7 +39,7 @@ function buildAnalyzePrompt(input: AnalyzeInput): string {
 
 	// The dictionary CONSTRAINS THE OUTPUT SPACE; it does not teach the model
 	// what a correct answer looks like. That distinction is what keeps it on the
-	// right side of the PRD Non-Goal against learning loops — see CLAUDE.md,
+	// right side of the product rule against learning loops — see CLAUDE.md,
 	// "Tag vocabulary in the analyze() prompt".
 	if (input.vocabulary.length > 0) {
 		lines.push(

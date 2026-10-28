@@ -12,7 +12,7 @@ import {
  * module that knows that response's shape, and the one place a phone number
  * could escape capture reconciliation.
  *
- * PROVENANCE OF THE FIXTURES, stated because `lessons.md` requires it of any
+ * PROVENANCE OF THE FIXTURES, stated because CLAUDE.md "Lessons" requires it of any
  * frozen literal. These are NOT golden vectors and prove nothing about the
  * vendor: they are hand-built rows in the SHAPE measured live on 2026-09-08
  * (recorded in this change's `frame.md`) — `pbx_call_id` as `in_`/`out_` + 40
@@ -156,7 +156,7 @@ describe("mapZadarmaPendingRecordings — one conversation, many rows [1.5]", ()
 	/**
 	 * PROVENANCE, field by field, because "live-shaped" and "live" are not the
 	 * same claim and conflating them is what let the HMAC vector drift
-	 * (`lessons.md`).
+	 * (CLAUDE.md "Lessons").
 	 *
 	 * LIVE, from conversation `in_d30d9346…` on 2026-09-08: the two `call_id`
 	 * values, the two leg durations (10 s ring / 126 s talk), the `sip` split,
@@ -387,7 +387,7 @@ describe("zadarma-statistics.ts source guard [1.7]", () => {
 	 * from a used one.
 	 *
 	 * Comments are stripped before scanning, per the recurring rule in
-	 * `lessons.md` ("prose that merely mentions a path must not trip the guard").
+	 * CLAUDE.md "Lessons" ("prose that merely mentions a path must not trip the guard").
 	 * The header of the module under test names `destination` and `clid` on
 	 * purpose — that warning is what stops the fields being added back, so a
 	 * scanner that tripped on it would push us to delete the warning to satisfy

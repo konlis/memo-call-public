@@ -16,8 +16,8 @@
  * except as the `nameHint` field. What writes the result to the database is
  * `jobs/counterparty.ts`, and nothing else.
  *
- * THE LEG RULE — MEASURED, not inferred (`context/changes/
- * caller-identity-in-archive/spike.md`, two live calls on 2026-10-19):
+ * THE LEG RULE — MEASURED, not inferred (a spike on two live calls,
+ * 2026-10-19):
  *
  *   - `in_…`: the caller's number AND presentation name are in `clid`, as
  *     `"Name" <+48…>`, IDENTICAL on every leg of the conversation (trunk,
@@ -126,7 +126,7 @@ function numberPart(raw: string): string {
  * (digits in an unknown layout, a non-integer or out-of-range JSON number, a
  * value of an unexpected type). Only the first is a fact about the caller; the
  * second is a fact about the vendor's format, and must not be stored as the
- * first. CLIR's real shape was NOT measured (`spike.md`), so "no digit" is the
+ * first. CLIR's real shape was NOT measured in that spike, so "no digit" is the
  * conservative line: anything carrying a digit is presumed to be a number.
  */
 function missingNumberOutcome(raw: unknown): "withheld" | "unparsed" {

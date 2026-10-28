@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// Playwright config for MemoCall's E2E layer (test-plan.md §3 Phase 3).
+// Playwright config for MemoCall's E2E layer (see tests/e2e/E2E_RULES.md).
 //
 // The webServer below is HERMETIC and self-seeding: it migrates a throwaway
 // test DB, seeds the single-user password (so the F-03 route gate redirects an

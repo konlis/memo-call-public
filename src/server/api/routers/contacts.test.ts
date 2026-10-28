@@ -361,7 +361,7 @@ describe("isUniqueViolation", () => {
  * The audit assertion is POSITIVE and EXHAUSTIVE — the exact key set — not
  * "does not contain `name`". Absence is satisfied by a typo'd field name and by
  * the audit never having been written at all, so it can only ever prove that
- * one spelling is missing (lessons.md; plan-review F3). A contact's NAME is the
+ * one spelling is missing (CLAUDE.md "Lessons"; plan-review F3). A contact's NAME is the
  * identity here, which is why this is worth a dedicated test.
  */
 describe("audit lines", () => {

@@ -225,7 +225,7 @@ export type ZadarmaStatisticsScan = {
  * MEASURED 2026-09-09 on two live multi-leg conversations, checked against the
  * VENDOR'S OWN answer — the `recording_sid` each one delivered by
  * `NOTIFY_RECORD`, read back out of the production database, i.e. evidence whose
- * provenance is independent of this code (`lessons.md`): `in_d30d9346…` spans a
+ * provenance is independent of this code (CLAUDE.md "Lessons"): `in_d30d9346…` spans a
  * 10 s and a 126 s leg and the vendor named the 126 s one; `in_ce8a39d5…` spans
  * 8 s and 69 s and the vendor named the 69 s one. Two samples is not a spec, but
  * it beats the arbitrary response order this used to depend on, and it agrees

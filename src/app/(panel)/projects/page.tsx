@@ -8,7 +8,7 @@ import { ProjectsView } from "./_components/projects-view";
 // `prefetch` (NOT prefetchInfinite) — `projects.list` is a single, non-paginated
 // grouped query with no cursor input. The prefetch runs the server caller → a DB
 // read, so this RSC MUST opt out of static prerender or the build hits the empty
-// placeholder DB ("no such table"; lessons.md: "a green build ≠ deploy").
+// placeholder DB ("no such table"; CLAUDE.md "Lessons": "a green build ≠ deploy").
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {

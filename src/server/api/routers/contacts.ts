@@ -39,7 +39,7 @@ import { normalizePolishE164 } from "~/server/telephony/phone";
  *
  * ⚠️ NO `onConflict*` ANYWHERE IN THIS FILE. `contact_user_e164_uq` is a
  * PARTIAL unique index and drizzle mis-positions the predicate in
- * `onConflictDoNothing({ target, where })` (lessons.md — the same bug that made
+ * `onConflictDoNothing({ target, where })` (CLAUDE.md "Lessons" — the same bug that made
  * `dialed_user_e164_uq` full). The duplicate-number path is an explicit SELECT
  * (for a message naming the colliding contact) plus a `try`/`catch` around the
  * write that maps ONLY a recognized unique violation onto `CONFLICT`. The index

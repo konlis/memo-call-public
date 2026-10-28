@@ -53,7 +53,7 @@ function makeRequest(
  * what it meant. The buried case is deliberately NOT stubbed: it is driven
  * against real libsql in `webhooks.integration.test.ts`, because a stub that
  * returns whatever the test tells it to cannot prove the SQL is well-formed
- * (`lessons.md`, "a stub-db unit test structurally cannot catch malformed SQL").
+ * (CLAUDE.md "Lessons", "a stub-db unit test structurally cannot catch malformed SQL").
  */
 function makeDb(conflicts: boolean[]) {
 	let call = 0;

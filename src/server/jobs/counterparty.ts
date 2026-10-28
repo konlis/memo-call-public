@@ -19,7 +19,7 @@
  *        - `unavailable` + `selfRefused` — the candidate was the user's OWN
  *          GSM (`USER_FORWARD_NUMBER`). That is pre-mortem #1 turned into a
  *          COUNTER instead of a guess: the leg rule was measured
- *          (`spike.md`), but if it is ever wrong the symptom is a non-zero
+ *          in a live spike, but if it is ever wrong the symptom is a non-zero
  *          `selfRefused` in `fly logs`, not the owner's number stored on every
  *          outbound call.
  *      A `pending` conversation with NO resolution in the window stays

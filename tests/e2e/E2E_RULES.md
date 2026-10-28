@@ -27,8 +27,8 @@ tests on it.
 
 ## The control question (every assertion must pass it)
 
-> Would this assertion FAIL if its `context/foundation/test-plan.md` risk
-> materialized?
+> Would this assertion FAIL if the risk it guards (named in the spec's
+> header comment) materialized?
 
 If not, the assertion is decorative — fix it. Confirm with a deliberate break:
 weaken the production behavior the risk targets and watch the test go red.

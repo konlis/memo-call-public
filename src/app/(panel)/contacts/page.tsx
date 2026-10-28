@@ -8,7 +8,7 @@ import { ContactsView } from "./_components/contacts-view";
 // `contacts.list` is a single non-paginated query with no cursor input. The
 // prefetch runs the server caller → a DB read, so this RSC MUST opt out of
 // static prerender or the build hits the empty placeholder DB ("no such table";
-// lessons.md: "a green build ≠ deploy").
+// CLAUDE.md "Lessons": "a green build ≠ deploy").
 export const dynamic = "force-dynamic";
 
 export default async function ContactsPage() {

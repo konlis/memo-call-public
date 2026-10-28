@@ -29,7 +29,7 @@ import {
 import type { CounterpartyResolution } from "~/server/telephony/types";
 
 /**
- * The counterparty sweep (FR-025) on a REAL libsql database, per `lessons.md`:
+ * The counterparty sweep (FR-025) on a REAL libsql database, per CLAUDE.md "Lessons":
  * the whole module is one `UPDATE … WHERE counterparty_state = 'pending'`
  * predicate plus a canonicalization step, and a stub db cannot tell you whether
  * that predicate does what the schema comment claims — which is the entire

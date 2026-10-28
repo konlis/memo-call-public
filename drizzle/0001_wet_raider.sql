@@ -30,7 +30,7 @@ ALTER TABLE `memo-call_conversations` ADD `category_overridden` integer DEFAULT 
 -- ALTER…ADD…REFERENCES table name UNQUOTED (`memo-call_projects`), so SQLite parses
 -- the hyphen as subtraction → "near \"-\": syntax error". It also drops the ON DELETE
 -- action on this path. Backticks added + ON DELETE SET NULL restored (the schema.ts
--- declaration). Valid because the added column defaults to NULL. See lessons.md.
+-- declaration). Valid because the added column defaults to NULL. See CLAUDE.md "Lessons".
 ALTER TABLE `memo-call_conversations` ADD `project_id` text REFERENCES `memo-call_projects`(`id`) ON DELETE SET NULL;--> statement-breakpoint
 ALTER TABLE `memo-call_conversations` ADD `project_overridden` integer DEFAULT false NOT NULL;--> statement-breakpoint
 CREATE UNIQUE INDEX `conv_user_callsid_uq` ON `memo-call_conversations` (`user_id`,`call_sid`) WHERE call_sid IS NOT NULL;

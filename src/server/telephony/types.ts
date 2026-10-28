@@ -89,7 +89,7 @@ export type RecordingEvent = {
  * database, never in a log line. What ENFORCES that is the absence of a field
  * on this type: a consumer reaching for the number gets a compile error, not a
  * code-review comment. Adding one here re-opens the product decision recorded
- * in `context/foundation/roadmap-post-mvp.md` (S-06).
+ * in `context/domain/04-privacy-and-anonymity.md` §A-1.
  *
  * The timing fields are optional and a provider may legitimately leave all
  * three unset (Zadarma does — see `zadarma-statistics.ts`), which lands exactly

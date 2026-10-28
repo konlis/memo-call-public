@@ -48,7 +48,7 @@ układają się wszystkie luki poniżej.
 
 ### A-1. Numer i nazwa rozmówcy — gdzie leżą, jak tam trafiają, czego nie robią
 
-> **Przepisane 2026-10-20** przy wdrożeniu `caller-identity-in-archive` (FR-025 w `prd.md`,
+> **Przepisane 2026-10-20** przy wdrożeniu `caller-identity-in-archive` (FR-025,
 > wariant **C** decyzji S-06 z 2026-10-16: „chcę wiedzieć, jaki numer, i móc przypisać
 > etykietę"). Zastępuje ustalenie z 2026-08-04 („numer rozmówcy nie istnieje w naszej bazie")
 > i jego dwie korekty (`dialed_numbers` 2026-08-04, `contacts` 2026-09-15). Tamte zdania były
@@ -75,7 +75,7 @@ odtwarzania wstecz.
   'pending'` na jeden z trzech stanów końcowych: `known` (numer + opcjonalna podpowiedź),
   `withheld` (operator nie podał numeru — CLIR), `unavailable` (brak wiersza statystyk przez
   24 h **albo** kandydat okazał się własnym GSM użytkownika — liczone jako `selfRefused`).
-- Reguła wyboru nogi (zmierzona, `context/changes/caller-identity-in-archive/spike.md`):
+- Reguła wyboru nogi (zmierzona na dwóch prawdziwych połączeniach, 2026-10-19):
   rozmowa przychodząca → `clid`, wychodząca → `destination`. `clid` przy wychodzącej to
   **własny** numer użytkownika — dlatego odrzucenie własnego GSM jest licznikiem
   w `telephony.counterparty.sweep`, a nie zgadywaniem.
@@ -221,7 +221,7 @@ prawidłowo i przy okazji zgodna z FR-020.
 
 Brak e-maila, nazwiska, konta. `userId` to literał `'me'` (`api/trpc.ts:33`), jedyne dane to hash
 hasła (`auth_config.password_hash`) i IP w logach logowania. Brak flow rejestracji, brak recovery
-mailowego (świadoma decyzja: `prd.md:271` — „avoids GDPR consent surface for recovery emails").
+mailowego (świadoma decyzja produktowa — „avoids GDPR consent surface for recovery emails").
 
 ---
 
@@ -242,7 +242,7 @@ zmienia.
 Kasujemy **nagranie**, nie **rekord połączenia**. Numery obu stron, czas i `CallSid` zostają
 w koncie Twilio zgodnie z jego retencją. PRD odnotowuje to uczciwie: „delete przez Twilio API
 jest natychmiastowy na poziomie dostępu … ale ma vendor-udokumentowany ogon ≤30 dni
-backend-purge + ~40 dni okno metadanych" (`prd.md:134`).
+backend-purge + ~40 dni okno metadanych".
 
 ### I-3. Linkowalność: `call_sid` jest kluczem obcym do tożsamości
 
@@ -337,9 +337,9 @@ nadal nie wiedzą, z kim były, i nigdy się nie dowiedzą (A-1, brak odtwarzani
 
 | # | Deklaracja | Stan kodu | Waga |
 | --- | --- | --- | --- |
-| **L-1** | „Audit logging across cloud hops. Każda interakcja z cloud STT i cloud LLM logged (operation type, timestamp, request size, latency) — nie payload content" (`prd.md:104`) | **niespełnione** — logujemy przejścia zadania (`jobs/audit.ts:10-19`); grep po `latency`/`bytes`/`requestSize` w `src/server` nie zwraca niczego z tej ścieżki | średnia — to guardrail, nie „nice to have" |
-| **L-2** | „Data portability. Wszystkie persystowane dane użytkownika … są eksportowalne w open formats (JSON i/lub Markdown) — żadnego vendor lock-in po stronie danych" (`prd.md:107`) | **brak** — żadna procedura tRPC nie eksportuje (stan 2026-10-20: 25 definicji `.query`/`.mutation` w `api/routers/*.ts`, w tym router `contacts`; inwentarz z 2026-08-04 liczył 17) | średnia |
-| **L-3** | poinformowanie drugiej strony o nagrywaniu | **brak i nieadresowane** — TwiML to samo `<Dial record="record-from-answer-dual">` bez `<Say>` (`telephony/twilio.ts:101-110` inbound, `:134-141` outbound); w `prd.md` i `shape-notes.md` **brak wątku zgody/informowania** — jedyne trafienia „GDPR" dotyczą e-maili do resetu hasła (`prd.md:256`, `:271`) | **wysoka** |
+| **L-1** | „Audit logging across cloud hops. Każda interakcja z cloud STT i cloud LLM logged (operation type, timestamp, request size, latency) — nie payload content" (PRD) | **niespełnione** — logujemy przejścia zadania (`jobs/audit.ts:10-19`); grep po `latency`/`bytes`/`requestSize` w `src/server` nie zwraca niczego z tej ścieżki | średnia — to guardrail, nie „nice to have" |
+| **L-2** | „Data portability. Wszystkie persystowane dane użytkownika … są eksportowalne w open formats (JSON i/lub Markdown) — żadnego vendor lock-in po stronie danych" (PRD) | **brak** — żadna procedura tRPC nie eksportuje (stan 2026-10-20: 25 definicji `.query`/`.mutation` w `api/routers/*.ts`, w tym router `contacts`; inwentarz z 2026-08-04 liczył 17) | średnia |
+| **L-3** | poinformowanie drugiej strony o nagrywaniu | **brak i nieadresowane** — TwiML to samo `<Dial record="record-from-answer-dual">` bez `<Say>` (`telephony/twilio.ts:101-110` inbound, `:134-141` outbound); w dokumentach projektowych **brak wątku zgody/informowania** — jedyne trafienia „GDPR" dotyczą e-maili do resetu hasła (PRD) | **wysoka** |
 | **L-4** | ograniczenie przechowywania / retencja | **brak** — rozmowy leżą bezterminowo; jedyna zamiatarka (`scheduler.ts:91-125`) kasuje **nagrania u dostawcy**, nie stare rozmowy; jedyne kasowanie danych to ręczne `conversations.delete` (`:490`) | wysoka |
 | **L-5** | realizacja żądania „usuń moje dane" od osoby trzeciej | **łatwiejsza od FR-025, ale niepełna** — dla rozmów od wdrożenia jest po czym szukać (filtr po kontakcie po nadaniu etykiety; numer przy rozmowie), lecz nie ma wyszukiwania po surowym numerze; rozmowy sprzed wdrożenia — tylko przeszukanie treści; numery wypowiedziane w transkrypcie (I-1) i snapshoty (I-6) bez zmian | średnia |
 | **L-6** | świadome udokumentowanie A-1 | **domknięte 2026-10-20** — A-1 jest decyzją (FR-025), opisaną w CLAUDE.md i w komentarzu schematu, z czterema strażnikami w testach (jedna ścieżka zapisu, brak numeru w promptach, sanitizer z testem sinków, klucze audytu) | — |
@@ -390,7 +390,8 @@ jedna zmiana („retencja i eksport"), bo dotykają tej samej warstwy.
 **Odczytane fragmentarycznie:** `src/server/jobs/worker.ts` (115-130, 178-210 + grep),
 `src/server/jobs/scheduler.ts` (grep tematyczny), `src/server/api/routers/{conversations,tags}.ts`
 (fragmenty audytu + kasowania), `src/server/stt/deepgram.ts` (grep po etykietach mówców),
-`context/foundation/prd.md` i `shape-notes.md` (grep tematyczny), `README.md`, `CLAUDE.md`.
+niepubliczne dokumenty projektowe (PRD, notatki discovery — grep tematyczny), `README.md`,
+pełna wersja `CLAUDE.md` (w repo publicznym jest okrojona).
 
 **Twierdzenia negatywne i ich dowody:**
 
